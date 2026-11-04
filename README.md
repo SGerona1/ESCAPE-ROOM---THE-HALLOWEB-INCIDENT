@@ -24,4 +24,5 @@
 - [Agent 1] Simulada la branca infectada feature/nightmare-code (no l'havia creada el professor). Commit infectat: 96201c7.
 - [Agent 1] L'script scripts/nightmare.sh desactiva el tallafocs, obre el port 6666 i envia dades a un servidor extern.
 - [Agent 1] Branca aïllada: no s'integra a main. No cal revertir perquè el codi no ha arribat mai a main.
+- [Agent 1] Afegida la columna Port_Infectat al CSV (branca hotfix/protocol-updtae). Issue tancada i tag v0.2-beta publicada.
 ### Fase 3
