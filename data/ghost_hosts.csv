@@ -1,4 +1,4 @@
-Host_ID,Adreca_IP,Nom_Host,Nivell_Amenaca,Estat
+Host_ID,Adreca_IP,Nom_Host,Nivell_Amenaca,Estat,Port_Infectat
 1,192.168.1.10,srv-web-01,Alt,Infectat
 2,192.168.1.22,srv-db-02,Mitja,Sospitos
 3,192.168.1.35,pc-admin-03,Baix,Net
