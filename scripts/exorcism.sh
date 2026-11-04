@@ -35,43 +35,40 @@ mkdir -p reports
 # Cabecera del log
 echo "=== EXORCISM LOG - $(date) ===" > "$LOG_FILE"
 
-echo -e "${YELLOW}[*] Analizando hosts infectados...${NC}"
+echo -e "${YELLOW}[*] Analizando hosts...${NC}"
 echo ""
 
-TOTAL=0
-AISLADOS=0
-
 # Leer el CSV saltando la cabecera
-tail -n +2 "$CSV_FILE" | while IFS=',' read -r ip hostname amenaza severidad puerto; do
+# Columnas reales: Host_ID, Adreca_IP, Nom_Host, Nivell_Amenaca, Estat
+tail -n +2 "$CSV_FILE" | while IFS=',' read -r id ip nom nivell estat; do
 
     # Limpiar espacios
+    id=$(echo "$id" | xargs)
     ip=$(echo "$ip" | xargs)
-    hostname=$(echo "$hostname" | xargs)
-    amenaza=$(echo "$amenaza" | xargs)
-    severidad=$(echo "$severidad" | xargs)
-    puerto=$(echo "$puerto" | xargs)
+    nom=$(echo "$nom" | xargs)
+    nivell=$(echo "$nivell" | xargs)
+    estat=$(echo "$estat" | xargs)
 
-    TOTAL=$((TOTAL + 1))
+    # Solo aislamos Infectat y Sospitos
+    if [[ "$estat" == "Infectat" || "$estat" == "Sospitos" ]]; then
+        echo -e "${RED}[AMENAZA]${NC} $nom ($ip) - Nivel: $nivell - Estado: $estat"
+        echo "  → Aislando host $ip ..."
+        echo "$(date) - AISLADO: $ip ($nom) - $nivell - $estat" >> "$LOG_FILE"
 
-    echo -e "${RED}[INFECTADO]${NC} $hostname ($ip)"
-    echo "           Amenaza: $amenaza | Severidad: $severidad | Puerto: $puerto"
+        # Ejemplo de comando real (comentado por seguridad):
+        # sudo iptables -A INPUT -s "$ip" -j DROP
+        # sudo iptables -A OUTPUT -d "$ip" -j DROP
 
-    # === LÓGICA DE AISLAMIENTO ===
-    echo "  → Aislando host $ip ..."
-    echo "$(date) - AISLADO: $ip ($hostname) - $amenaza" >> "$LOG_FILE"
-
-    # Ejemplo de comando real (comentado por seguridad):
-    # sudo iptables -A INPUT -s "$ip" -j DROP
-    # sudo iptables -A OUTPUT -d "$ip" -j DROP
-
-    AISLADOS=$((AISLADOS + 1))
-    echo -e "  ${GREEN}[OK] Host aislado${NC}"
-    echo ""
+        echo -e "  ${GREEN}[OK] Host aislado${NC}"
+        echo ""
+    else
+        echo -e "${GREEN}[LIMPIO]${NC} $nom ($ip) - Estado: $estat → sin acción"
+        echo ""
+    fi
 
 done
 
 echo -e "${YELLOW}========================================${NC}"
 echo -e "${GREEN}Proceso completado${NC}"
-echo "Hosts procesados: $TOTAL"
 echo "Log guardado en: $LOG_FILE"
 echo -e "${YELLOW}========================================${NC}"
