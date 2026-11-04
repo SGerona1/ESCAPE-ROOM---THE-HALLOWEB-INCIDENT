@@ -1,3 +1,3 @@
-=== EXORCISM LOG - Wed, Nov  4, 2026 10:51:43 PM ===
-Wed, Nov  4, 2026 10:51:44 PM - AISLADO: 192.168.1.10 (srv-web-01) - Alt - Infectat
-Wed, Nov  4, 2026 10:51:45 PM - AISLADO: 192.168.1.22 (srv-db-02) - Mitja - Sospitos
+=== EXORCISM LOG - Wed, Nov  4, 2026 10:53:20 PM ===
+Wed, Nov  4, 2026 10:53:21 PM - DESCARTADO: 192.168.1.10 (srv-web-01) - Puerto:  no crítico
+Wed, Nov  4, 2026 10:53:22 PM - DESCARTADO: 192.168.1.22 (srv-db-02) - Puerto:  no crítico
