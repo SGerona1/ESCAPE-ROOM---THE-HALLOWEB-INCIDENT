@@ -26,3 +26,4 @@
 - [Agent 1] Branca aïllada: no s'integra a main. No cal revertir perquè el codi no ha arribat mai a main.
 - [Agent 1] Afegida la columna Port_Infectat al CSV (branca hotfix/protocol-updtae). Issue tancada i tag v0.2-beta publicada.
 ### Fase 3
+- Conflicte al README.md resolt manualment entre els dos agents i bitàcola consolidada.
